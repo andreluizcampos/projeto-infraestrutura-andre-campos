@@ -54,6 +54,8 @@ body {
     padding: 0.3rem 0;
     border-bottom: 3px solid transparent;
     transition: color 0.2s, border-color 0.2s;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.6rem;
 }
 
 .nav:hover {
@@ -67,4 +69,23 @@ body {
     color: var(--creme);
     border-bottom-color: var(var(--caramelo));
 
+}
+
+@media(min-width: 768px) {
+
+    .menu {
+
+        display: none;
+
+    }
+
+    .nav {
+
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        gap: 1.5rem;
+        padding-top: 0;
+
+    }
 }
