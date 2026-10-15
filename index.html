@@ -26,13 +26,12 @@
       <a href="#"> Lidos</a>
     </nav>
   </header>
-
   <main>
 
-    <section class = "busca">
+    <section class="busca">
 
       <h1>Buscar livros</h1>
-       <form class="busca-form">
+      <form class="busca-form">
 
         <label for="campo-busca" class="sr-only">
 
@@ -41,9 +40,38 @@
         <input type="search" id="busca-campo" name="f" placeholder="Autor ou titulo" required>
 
         <button type="submit">Buscar</button>
-       </form>
+      </form>
 
-       </form> 
+      </form>
+    </section>
+    <section class="resultados">
+
+      <article class="book">
+
+        <img class="book-capa"
+        src="https://covers.openlibrary.org/b/isbn/0140328726-M.jpg"
+        alt="capa"
+        loading="lazy">
+
+        <div class ="book-info">
+
+          <h2 class ="book-titulo">
+            Default
+          </h2>
+          <p class= "book-autor">
+            neymar jr
+          </p>
+
+          <p class ="book-ano">
+            2001
+          </p>
+
+          <button class ="book-botao" type="button">
+            amigos da resenha
+          </button>
+        </div>
+
+      </article>
 
     </section>
   </main>
