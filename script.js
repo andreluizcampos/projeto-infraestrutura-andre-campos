@@ -16,7 +16,7 @@ const resultados = document.querySelector('.resultados');
 form.addEventListener('submit', async (acao) => {
 
 
-    acao.preventDefault(); // evitar refresh (?)
+    acao.preventDefault(); // evitar refresh (?) // revisar essa funcionalidade
 
     const text = campo.value.trim();
 
@@ -43,16 +43,66 @@ form.addEventListener('submit', async (acao) => {
 
     }
 
-    catch(erro){
+    catch (erro) {
 
         console.erro(erro);
-        resultados.textContent='Deu ruim paizao';
+        resultados.textContent = 'Deu ruim paizao';
     }
 
 });
 
-function criaBloco(livro){
+function criaBloco(livro) {
 
-    // na teoria aqui eh pra conseguir fz a API retornar um article bonitin 
+
+    const bloco = document.createElement('article');
+
+    bloco.className = 'Bloco';
+
+
+    if (livro.cover_i) {
+
+        const capa = document.createElement('img');
+        capa.src = 'https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg'
+        capa.alt = 'Capa de ${livro.title}';
+        capa.loading = 'lazy';
+        bloco.appendChild(capa);
+    }
+    else {
+
+
+        const noCapa = document.createElement('div');
+        noCapa.className = 'sem-capa';
+        bloco.appendChild(noCapa);
+
+    }
+
+    const info = document.createElement('div');
+    info.className = 'bloco-info';
+
+    const titulo = document.createElement('h2');
+    titulo.className = 'bloco-titulo';
+    titulo.textContent = livro.title;
+
+    const autor = document.createElement('p');
+    autor.className = 'bloco-autor';
+    autor.textContent = livro.author_name?.[0] ?? 'Desconhecido';
+
+
+    const ano = document.createElement('p');
+    ano.className = 'bloco-ano';
+    ano.textContent = livro.first_publish_year ?? '';
+
+    const botao = document.createElementNS('button');
+    botao.className = 'bloco-nome';
+    botao.type = 'button';
+    botao.textContent('Quero ler');
+
+
+    info.append(titulo, autor, ano, botao);
+
+    bloco.appendChild(info);
+
+
+    return bloco;
 
 }
