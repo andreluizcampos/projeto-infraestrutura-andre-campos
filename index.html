@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title></title>
+  <title>Resenha Books</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -12,75 +12,38 @@
 
   <header class="header">
     <a href="#" class="logo">
-
       <span class="logo-icone">Resenha Books</span>
     </a>
 
-    <button class="menu" aria-label="abrir menu" aria-expanded="false"> </button>
+    <button class="menu" aria-label="Abrir menu" aria-expanded="false">☰</button>
 
     <nav class="nav">
-
-      <a href="#" class="on"> Buscar </a>
-      <a href="#"> Quero ler</a>
-      <a href="#"> Lendo</a>
-      <a href="#"> Lidos</a>
+      <a href="#" class="on">Buscar</a>
+      <a href="#">Quero ler</a>
+      <a href="#">Lendo</a>
+      <a href="#">Lidos</a>
     </nav>
   </header>
+
   <main>
-
     <section class="busca">
-
       <h1>Buscar livros</h1>
+
       <form class="busca-form">
-
-        <label for="campo-busca" class="sr-only">
-
-          Titulo ou autor
-        </label>
-        <input type="search" id="busca-campo" name="f" placeholder="Autor ou titulo" required>
-
+        <label for="campo-busca" class="sr-only">Título ou autor</label>
+        <input type="search" id="campo-busca" name="q" placeholder="Autor ou título" required>
         <button type="submit">Buscar</button>
       </form>
-
-      </form>
     </section>
-    <section class="resultados">
 
-      <article class="book">
-
-        <img class="book-capa"
-        src="https://covers.openlibrary.org/b/isbn/0140328726-M.jpg"
-        alt="capa"
-        loading="lazy">
-
-        <div class ="book-info">
-
-          <h2 class ="book-titulo">
-            Default
-          </h2>
-          <p class= "book-autor">
-            neymar jr
-          </p>
-
-          <p class ="book-ano">
-            2001
-          </p>
-
-          <button class ="book-botao" type="button">
-            amigos da resenha
-          </button>
-        </div>
-
-      </article>
-
-    </section>
+    <section class="resultados"></section>
   </main>
 
   <footer>
     <p>Feito por [André Campos]</p>
   </footer>
 
-  <script src=" script.js"></script>
+  <script src="script.js"></script>
 </body>
 
 </html>

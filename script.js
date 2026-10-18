@@ -26,9 +26,9 @@ form.addEventListener('submit', async (acao) => {
 
     try {
 
-        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(termo)}&limit=1&fields=title,author_name,first_publish_year,cover_i`;
+        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(text)}&limit=1&fields=title,author_name,first_publish_year,cover_i`;
         const buscado = await fetch(url);
-        if (!buscado.ok) throw new Error('Erro ${resposta.status}');
+        if (!buscado.ok) throw new Error(` Erro ${buscado.status}`);
         const retorno = await buscado.json();
         const livro = retorno.docs[0];
 
@@ -45,7 +45,7 @@ form.addEventListener('submit', async (acao) => {
 
     catch (erro) {
 
-        console.erro(erro);
+        console.error(erro);
         resultados.textContent = 'Deu ruim paizao';
     }
 
@@ -56,14 +56,15 @@ function criaBloco(livro) {
 
     const bloco = document.createElement('article');
 
-    bloco.className = 'Bloco';
+    bloco.className = 'bloco';
 
 
     if (livro.cover_i) {
 
         const capa = document.createElement('img');
-        capa.src = 'https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg'
-        capa.alt = 'Capa de ${livro.title}';
+        capa.className ='bloco-capa';
+        capa.src = `https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg`
+        capa.alt = `Capa de ${livro.title}`;
         capa.loading = 'lazy';
         bloco.appendChild(capa);
     }
@@ -71,7 +72,7 @@ function criaBloco(livro) {
 
 
         const noCapa = document.createElement('div');
-        noCapa.className = 'sem-capa';
+        noCapa.className = 'bloco-capa no-capa';
         bloco.appendChild(noCapa);
 
     }
@@ -92,10 +93,10 @@ function criaBloco(livro) {
     ano.className = 'bloco-ano';
     ano.textContent = livro.first_publish_year ?? '';
 
-    const botao = document.createElementNS('button');
-    botao.className = 'bloco-nome';
+    const botao = document.createElement('button');
+    botao.className = 'bloco-botao';
     botao.type = 'button';
-    botao.textContent('Quero ler');
+    botao.textContent = 'Quero ler';
 
 
     info.append(titulo, autor, ano, botao);
