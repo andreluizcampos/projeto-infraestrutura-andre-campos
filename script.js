@@ -26,20 +26,24 @@ form.addEventListener('submit', async (acao) => {
 
     try {
 
-        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(text)}&limit=1&fields=title,author_name,first_publish_year,cover_i`;
+        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(text)}&limit=12&fields=title,author_name,first_publish_year,cover_i`;
         const buscado = await fetch(url);
         if (!buscado.ok) throw new Error(` Erro ${buscado.status}`);
         const retorno = await buscado.json();
-        const livro = retorno.docs[0];
+        const livro = retorno.docs;
 
-        if (!livro) {
+        if (livro.length == 0) {
             resultados.textContent = 'Nenhum resultado encontrado';
             return;
         }
 
         resultados.textContent = ' ';
-        resultados.appendChild(criaBloco(livro));
 
+        livro.forEach((item) => {
+
+            resultados.appendChild(criaBloco(item));
+        })
+        
 
     }
 
@@ -62,7 +66,7 @@ function criaBloco(livro) {
     if (livro.cover_i) {
 
         const capa = document.createElement('img');
-        capa.className ='bloco-capa';
+        capa.className = 'bloco-capa';
         capa.src = `https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg`
         capa.alt = `Capa de ${livro.title}`;
         capa.loading = 'lazy';
