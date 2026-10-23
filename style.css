@@ -47,6 +47,20 @@ body {
 
 }
 
+.nav {
+
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+    padding-top: 0.8rem;
+}
+
+.nav.open {
+
+    display: flex;
+}
+
 .nav a {
 
     color: var(--areia);
@@ -58,7 +72,7 @@ body {
     font-size: 1.6rem;
 }
 
-.nav:hover {
+.nav a:hover {
 
     color: var(--creme);
 }
@@ -67,8 +81,130 @@ body {
 .nav a.on {
 
     color: var(--creme);
-    border-bottom-color: var(var(--caramelo));
+    border-bottom-color: var(--caramelo);
 
+}
+
+.sr-only {
+
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+}
+
+.busca {
+
+    max-width: 720px;
+    margin: 2rem auto 1rem;
+    padding: 0 1rem;
+    text-align: center;
+    color: var(--cafe);
+}
+
+.busca-form {
+
+    display: flex;
+    gap: 0.5rem;
+}
+
+#campo-busca {
+
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 2px solid var(--areia);
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+#campo-busca:focus {
+
+    outline: none;
+    border-color: var(--caramelo);
+}
+
+.busca-form button,
+.bloco-botao {
+
+    background-color: var(--nogueira);
+    color: var(--creme);
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.busca-form button:hover,
+.bloco-botao:hover {
+
+    background-color: var(--cafe);
+}
+
+.resultados {
+
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    padding: 0 1rem;
+    color: var(--nogueira);
+    text-align: center;
+}
+
+.bloco {
+
+    display: flex;
+    gap: 1.2rem;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid var(--areia);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 6px rgba(62, 39, 35, 0.1);
+}
+
+.bloco-capa {
+
+    width: 120px;
+    height: 180px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.no-capa {
+
+    background-color: var(--areia);
+}
+
+.bloco-info {
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.bloco-titulo {
+
+    margin: 0;
+    color: var(--cafe);
+    font-size: 1.3rem;
+}
+
+.bloco-autor,
+.bloco-ano {
+
+    margin: 0;
+    color: var(--nogueira);
+}
+
+.bloco-botao {
+
+    margin-top: auto;
+    align-self: flex-start;
 }
 
 @media(min-width: 768px) {
