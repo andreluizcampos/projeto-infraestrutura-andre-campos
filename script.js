@@ -43,7 +43,7 @@ form.addEventListener('submit', async (acao) => {
 
             resultados.appendChild(criaBloco(item));
         })
-        
+
 
     }
 
@@ -111,3 +111,53 @@ function criaBloco(livro) {
     return bloco;
 
 }
+
+//  Botao de add:
+
+const KEY = 'resenha-listas';
+
+function CarregaListas() {
+
+
+    try {
+
+        const salvo = localStorage.getItem(KEY);
+
+
+        return salvo ? JSON.parse(salvo) : { queroler: [], lendo: [], lidos: [] };
+
+
+    }
+    catch {
+
+        return { queroler: [], lendo: [], lidos: [] };
+    }
+
+
+}
+
+function SalvaListas(listas) {
+
+    localStorage.setItem(KEY, JSON.stringify(listas));
+
+
+
+}
+
+
+function EstaNaLista(key) {
+
+    const listas = CarregaListas();
+
+    const all = [...listas.queroler, ...listas.lendo, ...listas.lidos];
+
+
+    return all.some((salvo) => salvo.key == key);
+
+
+}
+
+
+
+
+
