@@ -104,7 +104,22 @@ function criaBloco(livro, L1) {
 
         const seletor = document.createElement('select');
         seletor.className = 'bloco-seletor';
-        info.apend(titulo, autor, ano, seletor);
+        info.append(titulo, autor, ano, seletor);
+
+        const opt = [
+            { valor: 'queroler', texto: 'QUero ler' },
+            { valor: 'lendo', texto: 'Lendo' },
+            { valor: 'lidos', texto: 'Lido' },];
+
+
+        opt.forEach((op) => {
+
+            const option = document.createElement('option');
+            option.value = op.valor;
+            option.textContent = op.texto;
+            seletor.appendChild(option);
+            option.selected = op.valor === L1;
+        })
 
 
     }
