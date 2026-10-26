@@ -1,12 +1,9 @@
 const botao = document.querySelector('.menu');
 const nav = document.querySelector('.nav');
+
 botao.addEventListener('click', () => {
-
-
-
     const open = nav.classList.toggle('open');
     botao.setAttribute('aria-expanded', open);
-
 });
 
 const form = document.querySelector('.busca-form');
@@ -14,21 +11,18 @@ const campo = document.querySelector('#campo-busca');
 const resultados = document.querySelector('.resultados');
 
 form.addEventListener('submit', async (acao) => {
-
-
     acao.preventDefault(); // evitar refresh (?) // revisar essa funcionalidade
 
     const text = campo.value.trim();
 
     if (!text) return;
 
-    resultados.textContent = 'Buscando na biblioteca'
+    resultados.textContent = 'Buscando na biblioteca';
 
     try {
-
-        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(text)}&limit=12&fields=title,author_name,first_publish_year,cover_i`;
+        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(text)}&limit=12&fields=key,title,author_name,first_publish_year,cover_i`;
         const buscado = await fetch(url);
-        if (!buscado.ok) throw new Error(` Erro ${buscado.status}`);
+        if (!buscado.ok) throw new Error(`Erro ${buscado.status}`);
         const retorno = await buscado.json();
         const livro = retorno.docs;
 
@@ -37,48 +31,33 @@ form.addEventListener('submit', async (acao) => {
             return;
         }
 
-        resultados.textContent = ' ';
+        resultados.textContent = '';
 
         livro.forEach((item) => {
-
             resultados.appendChild(criaBloco(item));
-        })
+        });
 
-
-    }
-
-    catch (erro) {
-
+    } catch (erro) {
         console.error(erro);
         resultados.textContent = 'Deu ruim paizao';
     }
-
 });
 
 function criaBloco(livro) {
-
-
     const bloco = document.createElement('article');
-
     bloco.className = 'bloco';
 
-
     if (livro.cover_i) {
-
         const capa = document.createElement('img');
         capa.className = 'bloco-capa';
-        capa.src = `https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg`
+        capa.src = `https://covers.openlibrary.org/b/id/${livro.cover_i}-M.jpg`;
         capa.alt = `Capa de ${livro.title}`;
         capa.loading = 'lazy';
         bloco.appendChild(capa);
-    }
-    else {
-
-
+    } else {
         const noCapa = document.createElement('div');
         noCapa.className = 'bloco-capa no-capa';
         bloco.appendChild(noCapa);
-
     }
 
     const info = document.createElement('div');
@@ -92,7 +71,6 @@ function criaBloco(livro) {
     autor.className = 'bloco-autor';
     autor.textContent = livro.author_name?.[0] ?? 'Desconhecido';
 
-
     const ano = document.createElement('p');
     ano.className = 'bloco-ano';
     ano.textContent = livro.first_publish_year ?? '';
@@ -100,16 +78,24 @@ function criaBloco(livro) {
     const botao = document.createElement('button');
     botao.className = 'bloco-botao';
     botao.type = 'button';
-    botao.textContent = 'Quero ler';
 
+    if (EstaNaLista(livro.key)) {
+        botao.textContent = 'Na lista';
+        botao.disabled = true;
+    } else {
+        botao.textContent = 'Quero ler';
+
+        botao.addEventListener('click', () => {
+            AddQueroLer(livro);
+            botao.textContent = 'Na lista';
+            botao.disabled = true;
+        });
+    }
 
     info.append(titulo, autor, ano, botao);
-
     bloco.appendChild(info);
 
-
     return bloco;
-
 }
 
 //  Botao de add:
@@ -117,47 +103,38 @@ function criaBloco(livro) {
 const KEY = 'resenha-listas';
 
 function CarregaListas() {
-
-
     try {
-
         const salvo = localStorage.getItem(KEY);
-
-
         return salvo ? JSON.parse(salvo) : { queroler: [], lendo: [], lidos: [] };
-
-
-    }
-    catch {
-
+    } catch {
         return { queroler: [], lendo: [], lidos: [] };
     }
-
-
 }
 
 function SalvaListas(listas) {
-
     localStorage.setItem(KEY, JSON.stringify(listas));
-
-
-
 }
 
-
 function EstaNaLista(key) {
+    const listas = CarregaListas();
+    const all = [...listas.queroler, ...listas.lendo, ...listas.lidos];
+    return all.some((salvo) => salvo.key == key);
+}
+
+function AddQueroLer(livro) {
+    if (EstaNaLista(livro.key)) {
+        return;
+    }
 
     const listas = CarregaListas();
 
-    const all = [...listas.queroler, ...listas.lendo, ...listas.lidos];
+    listas.queroler.push({
+        key: livro.key,
+        title: livro.title,
+        author_name: livro.author_name ?? [],
+        first_publish_year: livro.first_publish_year ?? null,
+        cover_i: livro.cover_i ?? null,
+    });
 
-
-    return all.some((salvo) => salvo.key == key);
-
-
+    SalvaListas(listas);
 }
-
-
-
-
-
