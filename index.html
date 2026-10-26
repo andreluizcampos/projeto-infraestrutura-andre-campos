@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resenha Books</title>
+  <meta name="description" content="Busque livros e organize suas leituras">
   <link rel="stylesheet" href="style.css">
 </head>
 
@@ -18,17 +19,17 @@
     <button class="menu" aria-label="Abrir menu" aria-expanded="false">☰</button>
 
     <nav class="nav">
-      <a href="#" class="on">Buscar</a>
-      <a href="#">Quero ler</a>
-      <a href="#">Lendo</a>
-      <a href="#">Lidos</a>
+      <a href="#" class="on" data-lista="busca">Buscar</a>
+      <a href="#" data-lista="queroler">Quero ler</a>
+      <a href="#" data-lista="lendo">Lendo</a>
+      <a href="#" data-lista="lidos">Lidos</a>
     </nav>
   </header>
 
   <main>
     <section class="busca">
       <h1>Buscar livros</h1>
-
+      <p class="busca-sub"> Encontre livros e monte suas listas de leitura. </p>
       <form class="busca-form">
         <label for="campo-busca" class="sr-only">Título ou autor</label>
         <input type="search" id="campo-busca" name="q" placeholder="Autor ou título" required>

@@ -43,9 +43,11 @@ form.addEventListener('submit', async (acao) => {
     }
 });
 
-function criaBloco(livro) {
+function criaBloco(livro, L1) {
     const bloco = document.createElement('article');
     bloco.className = 'bloco';
+
+
 
     if (livro.cover_i) {
         const capa = document.createElement('img');
@@ -75,25 +77,41 @@ function criaBloco(livro) {
     ano.className = 'bloco-ano';
     ano.textContent = livro.first_publish_year ?? '';
 
-    const botao = document.createElement('button');
-    botao.className = 'bloco-botao';
-    botao.type = 'button';
 
-    if (EstaNaLista(livro.key)) {
-        botao.textContent = 'Na lista';
-        botao.disabled = true;
-    } else {
-        botao.textContent = 'Quero ler';
+    if (!L1) {
 
-        botao.addEventListener('click', () => {
-            AddQueroLer(livro);
+        const botao = document.createElement('button');
+        botao.className = 'bloco-botao';
+        botao.type = 'button';
+
+        info.append(titulo, autor, ano, botao);
+        if (EstaNaLista(livro.key)) {
             botao.textContent = 'Na lista';
             botao.disabled = true;
-        });
+        } else {
+            botao.textContent = 'Quero ler';
+
+            botao.addEventListener('click', () => {
+                AddQueroLer(livro);
+                botao.textContent = 'Na lista';
+                botao.disabled = true;
+            });
+        }
+
+
+    }
+    else {
+
+        const seletor = document.createElement('select');
+        seletor.className = 'bloco-seletor';
+        info.apend(titulo, autor, ano, seletor);
+
+
     }
 
-    info.append(titulo, autor, ano, botao);
     bloco.appendChild(info);
+
+
 
     return bloco;
 }
@@ -137,4 +155,23 @@ function AddQueroLer(livro) {
     });
 
     SalvaListas(listas);
+}
+
+function MoveLivro(key, l1, l2) {
+
+
+    if (l1 == l2) {
+
+        return;
+    }
+
+    const listas = CarregaListas();
+    const livro = listas[l1].find((l) => l.key === key);
+
+    if (!livro) return;
+
+    listas[l1] = listas[l1].filter((l) => l.key !== key);
+    listas[l2].push(livro);
+    SalvaListas(listas);
+
 }
