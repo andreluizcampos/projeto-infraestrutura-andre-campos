@@ -37,12 +37,32 @@ main {
 
 .logo {
 
+    display: inline-flex;
+    text-decoration: none;
+    align-items: baseline;
+
+}
+
+.logo1 {
+
+    font-family: 'A', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.6rem;
+    color: var(--caramelo);
+    font-weight: 500;
+    text-decoration: none;
+    animation: alternate-reverse;
+}
+
+.logo2 {
+
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 1.6rem;
     color: var(--creme);
     font-weight: 500;
     text-decoration: none;
+    animation: alternate-reverse;
 }
+
 
 .menu {
 
@@ -174,6 +194,7 @@ main {
     border-radius: 12px;
     padding: 1rem;
     box-shadow: 0 2px 6px rgba(62, 39, 35, 0.1);
+    animation: surgir 0.76s ease-in-out;
 }
 
 .bloco-capa {
@@ -286,4 +307,22 @@ footer p {
 
     margin: 0;
     background-color: var(--cafe);
+}
+
+@keyframes surgir {
+
+    from {
+
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+
+        opacity: 1;
+        transform: translateY(0);
+
+    }
+
+
 }
