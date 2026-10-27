@@ -18,7 +18,7 @@ body {
 
 }
 
-main{
+main {
     flex: 1;
 }
 
@@ -75,7 +75,7 @@ main{
     padding: 0.3rem 0;
     border-bottom: 3px solid transparent;
     transition: color 0.2s, border-color 0.2s;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 1.6rem;
 }
 
@@ -159,6 +159,9 @@ main{
     padding: 0 1rem;
     color: var(--nogueira);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .bloco {
@@ -208,11 +211,45 @@ main{
     color: var(--nogueira);
 }
 
+
 .bloco-botao {
 
     margin-top: auto;
     align-self: flex-start;
+
 }
+
+.bloco-botao:disabled {
+
+    margin-top: auto;
+    align-self: flex-start;
+    color: var(--nogueira);
+    background-color: var(--areia);
+    cursor: default;
+}
+
+.bloco-seletor {
+
+    margin-top: auto;
+    align-self: flex-start;
+    padding: 0.5rem 0.8rem;
+    font: inherit;
+    font-size: 1rem;
+    color: var(--cafe);
+    background-color: var(--creme);
+    border: 2px solid var(--areia);
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+.bloco-seletor:focus {
+
+    outline: none;
+    border-color: var(--caramelo);
+
+}
+
 
 @media(min-width: 768px) {
 
@@ -231,4 +268,22 @@ main{
         padding-top: 0;
 
     }
+}
+
+footer {
+
+    background-color: var(--cafe);
+    border-top: 4px solid var(--caramelo);
+    color: var(--areia);
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+
+
+}
+
+footer p {
+
+    margin: 0;
+    background-color: var(--cafe);
 }

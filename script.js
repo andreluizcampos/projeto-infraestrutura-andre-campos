@@ -21,7 +21,7 @@ form.addEventListener('submit', async (acao) => {
     resultados.textContent = 'Buscando na biblioteca';
 
     try {
-        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(text)}&limit=12&fields=key,title,author_name,first_publish_year,cover_i`;
+        const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(text)}&limit=16&fields=key,title,author_name,first_publish_year,cover_i`;
         const buscado = await fetch(url);
         if (!buscado.ok) throw new Error(`Erro ${buscado.status}`);
         const retorno = await buscado.json();
@@ -108,7 +108,7 @@ function criaBloco(livro, L1) {
         info.append(titulo, autor, ano, seletor);
 
         const opt = [
-            { valor: 'queroler', texto: 'QUero ler' },
+            { valor: 'queroler', texto: 'Quero ler' },
             { valor: 'lendo', texto: 'Lendo' },
             { valor: 'lidos', texto: 'Lido' },];
 
