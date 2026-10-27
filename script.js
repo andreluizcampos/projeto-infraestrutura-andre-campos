@@ -1,5 +1,6 @@
 const botao = document.querySelector('.menu');
 const nav = document.querySelector('.nav');
+const secaobusca = document.querySelector('.busca');
 
 botao.addEventListener('click', () => {
     const open = nav.classList.toggle('open');
@@ -121,6 +122,11 @@ function criaBloco(livro, L1) {
             option.selected = op.valor === L1;
         })
 
+        seletor.addEventListener('change', () => {
+
+            MoveLivro(livro.key, L1, seletor.value);
+            mostraLista(L1);
+        })
 
     }
 
@@ -190,3 +196,60 @@ function MoveLivro(key, l1, l2) {
     SalvaListas(listas);
 
 }
+
+function mostraLista(nome) {
+
+
+    const listas = CarregaListas();
+    const livros = listas[nome];
+    resultados.textContent = '';
+
+    if (livros.length == 0) {
+
+        resultados.textContent = 'Nenhum livro nesta lista ainda';
+        return;
+    }
+
+    livros.forEach((livro) => {
+
+        resultados.appendChild(criaBloco(livro, nome))
+    })
+
+
+
+
+}
+
+// trocar de aba chama lista:
+
+nav.addEventListener('click', (evento) => {
+
+    const link = evento.target.closest('a');
+
+    if (!link) {
+
+        return;
+    }
+
+    evento.preventDefault();
+
+    const lista = link.dataset.lista;
+
+    if (lista == 'busca') {
+
+        resultados.textContent = '';
+        secaobusca.hidden = false;
+    }
+    else {
+        secaobusca.hidden = true;
+        mostraLista(lista);
+    }
+
+    nav.querySelectorAll('a').forEach((l) => l.classList.remove('on'));
+    link.classList.add('on');
+    nav.classList.remove('open');
+    botao.setAttribute('aria-expanded', false);
+
+
+})
+
