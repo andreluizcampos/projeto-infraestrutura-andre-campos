@@ -22,5 +22,8 @@ Abra o arquivo index.html em seu navegador, contendo na mesma pasta o script.js 
 3. Animações com CSS
 4. Publicado no github pages
 
-
+## Implementações que faltaram:
+1. Botão de retirar;
+2. Carrosel que consome livros aleatórios da API para constante sugestão de livros
+3. Pesquisa de livros por gêneros que se sobrepõe (Confesso que daria um trabalho manejar a filtragem...)
 
