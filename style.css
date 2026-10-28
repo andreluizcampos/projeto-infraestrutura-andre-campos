@@ -63,6 +63,38 @@ main {
     animation: alternate-reverse;
 }
 
+.logonome {
+
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    transition: 0.3s;
+}
+
+.logo:hover .logonome {
+
+    opacity: 0;
+}
+
+.logo3 {
+
+    position: absolute;
+    opacity: 0;
+    top: 50%;
+    transform: translateY(50%);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.2rem;
+    color: var(--creme);
+    transition: opacity 1s;
+}
+
+
+.logo:hover .logo3 {
+
+    opacity: 1;
+
+}
+
 
 .menu {
 
