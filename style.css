@@ -87,6 +87,7 @@ main {
     font-size: 1.2rem;
     color: var(--creme);
     transition: opacity 1s;
+    left: 0;
 }
 
 
