@@ -40,6 +40,8 @@ main {
     display: inline-flex;
     text-decoration: none;
     align-items: baseline;
+    position: relative;
+    color: var(--creme);
 
 }
 
@@ -79,7 +81,7 @@ main {
 .logo3 {
 
     pointer-events: none;
-    position: relative;
+    position: absolute;
     opacity: 0;
     top: 50%;
     transform: translateY(-50%);
